@@ -21,7 +21,7 @@ public class WelcomeScreenController extends Controller {
     public void connectButtonAction(Event e) throws IOException {
         System.out.println("Connect button clicked");
         String ipAddress = ipAddressText.getText();
-        /*int portNumber = 5555;
+        int portNumber = 5555;
 
         try {
             portNumber = Integer.parseInt(portNumberText.getText());
@@ -34,7 +34,7 @@ public class WelcomeScreenController extends Controller {
             Platform.runLater(() -> {
                 System.out.println(data);
             });
-        }, ipAddress, portNumber);*/
+        }, ipAddress, portNumber);
 
         Parent gameScreen = FXMLLoader.load(getClass().getResource("/GameScreen.fxml"));
         Scene gameScene = new Scene(gameScreen);
