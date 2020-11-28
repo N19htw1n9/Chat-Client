@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GameScreenController">
+<AnchorPane prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GameScreenController">
    <children>
       <Button fx:id="quitButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#quitButtonAction" style="-fx-background-color: Crimson;" text="Quit" textFill="WHITE">
          <font>
@@ -47,6 +47,28 @@
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Label>
+            <Pane layoutX="801.0" layoutY="-117.0" prefHeight="800.0" prefWidth="285.0" style="-fx-background-color: #0078d7;">
+               <children>
+                  <TextArea fx:id="MessageOutputField" layoutX="9.0" layoutY="157.0" prefHeight="519.0" prefWidth="269.0" />
+                  <ComboBox fx:id="ClientsComboBox" editable="true" layoutX="9.0" layoutY="122.0" prefHeight="25.0" prefWidth="269.0" promptText="Select Client(s) to chat with" />
+                  <Label layoutX="116.0" layoutY="63.0" text="Chat" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="messageSendButton" layoutX="195.0" layoutY="681.0" mnemonicParsing="false" onAction="#startButtonAction" prefHeight="74.0" prefWidth="85.0" style="-fx-background-color: #0078d7;" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="62.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@SendPicButton.png" />
+                           </image></ImageView>
+                     </graphic>
+                  </Button>
+                  <TextArea fx:id="MessageInputField" layoutX="9.0" layoutY="686.0" prefHeight="64.0" prefWidth="193.0" />
+               </children></Pane>
          </children></Pane>
       <Pane fx:id="bankerPane" layoutX="144.0" layoutY="46.0" prefHeight="71.0" prefWidth="512.0">
          <children>
@@ -118,7 +140,7 @@
                </font>
             </ToggleButton>
          </children></Pane>
-      <Line endX="812.3999633789062" endY="626.0" opacity="0.26" startX="-5.7220458984375E-6" startY="626.0" />
-      <Line endX="803.0999755859375" endY="311.0" layoutX="10.0" layoutY="7.0" startX="-10.000005722045898" startY="311.0" stroke="GOLDENROD" />
+      <Line endX="815.0" endY="626.0" opacity="0.26" startX="-5.7220458984375E-6" startY="626.0" />
+      <Line endX="805.0" endY="311.0" layoutX="10.0" layoutY="7.0" startX="-10.000005722045898" startY="311.0" stroke="GOLDENROD" />
    </children>
 </AnchorPane>
