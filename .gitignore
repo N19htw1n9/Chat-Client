@@ -1,5 +1,7 @@
 target
-.vscode
 .idea
+.vscode
 .settings
+.classpath
+.project
 bin

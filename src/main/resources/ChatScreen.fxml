@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ChatController">
+    <children>
+        <Button fx:id="quitButton" layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#quitButtonAction" style="-fx-background-color: Crimson;" text="Quit" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+      <Pane layoutX="350.0" prefHeight="701.0" prefWidth="350.0" style="-fx-background-color: #0078d7;">
+         <children>
+                <Button fx:id="messageSendButton" layoutX="244.0" layoutY="576.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="85.0" style="-fx-background-color: #0078d7;" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="62.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@SendPicButton.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <TextArea fx:id="MessageInputField" layoutX="22.0" layoutY="581.0" prefHeight="64.0" prefWidth="229.0" />
+                <TextArea fx:id="MessageOutputField" layoutX="22.0" layoutY="113.0" prefHeight="458.0" prefWidth="306.0" />
+                <ComboBox fx:id="ClientsComboBox" editable="true" layoutX="22.0" layoutY="79.0" prefHeight="25.0" prefWidth="306.0" promptText="Select Client(s) to chat with" />
+                <Label fx:id="ChatLabel" layoutX="147.0" layoutY="34.0" text="Chat" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="26.0" />
+                    </font>
+                </Label>
+         </children>
+      </Pane>
+      <ListView fx:id="ClientsListView" layoutY="77.0" prefHeight="624.0" prefWidth="350.0" />
+      <Label fx:id="ClientsConnectedLabel" layoutX="75.0" layoutY="35.0" text="Clients Connected">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
