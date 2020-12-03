@@ -1,4 +1,4 @@
-package BaccaratGame;
+package Chat;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -34,16 +34,17 @@ public class ConnectionSocket extends Thread {
             System.out.printf("\n\nError, could not connect to server %s port %d\n", this.ip, this.port);
             return;
         }
-        System.out.printf("\nConnected to %s server on port %d\n", this.socket.getLocalSocketAddress().toString(), this.socket.getLocalPort());
+        System.out.printf("\nConnected to %s server on port %d\n", this.socket.getLocalSocketAddress().toString(),
+                this.socket.getLocalPort());
     }
 
-    public void send(double bid, String hand) throws IOException, ClassNotFoundException {
-        BaccaratInfo req = new BaccaratInfo(bid, hand);
+    public void send(String message, int to) throws IOException, ClassNotFoundException {
+        Packet req = new Packet();
         out.writeObject(req);
     }
 
-    public BaccaratInfo recieve() throws IOException, ClassNotFoundException {
-        return (BaccaratInfo) in.readObject();
+    public Packet recieve() throws IOException, ClassNotFoundException {
+        return (Packet) in.readObject();
     }
 
     public Socket getSocket() {

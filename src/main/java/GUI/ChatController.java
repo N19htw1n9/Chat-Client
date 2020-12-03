@@ -17,76 +17,19 @@ package GUI;
         and simple based on this video. See this link:
             https://www.youtube.com/watch?v=VVUuo9VO2II
  */
-
-import BaccaratGame.BaccaratInfo;
-import GUI.Controller;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 public class ChatController extends Controller {
-    @FXML private TextField playerBidText;
-    @FXML private ToggleButton playerToggleButton;
-    @FXML private ToggleButton bankerToggleButton;
-    @FXML private HBox BankerHBox;
-    @FXML private HBox PlayerHBox;
-    @FXML private Button quitButton;
-    @FXML private Button roundStatsButton;
-    @FXML private Button startButton;
-    @FXML private ImageView bankerLeftCard;
-    @FXML private ImageView bankerRightCard;
-    @FXML private ImageView bankerExtraCard;
-    @FXML private ImageView playerLeftCard;
-    @FXML private ImageView playerRightCard;
-    @FXML private ImageView playerExtraCard;
-    @FXML private Pane bankerPane;
-    @FXML private Pane playerPane;
-    @FXML private Label bankerWinLabel;
-    @FXML private Label playerWinLabel;
-    @FXML private Label winningsLabel;
-
-    private double winningsCount = 0;
+    @FXML
+    private Button quitButton;
 
     public void quitButtonAction(Event e)
     {
         Stage window = (Stage) ((Node)e.getSource()).getScene().getWindow();
         window.close();
-    }
-
-    public void sendButtonAction(Event e)
-    {
-        try
-        {
-
-        }
-        catch (Exception err)
-        {
-            System.out.println("Bid value must be a number");
-            return;
-        }
-
-
-        try
-        {
-
-        }
-        catch (Exception err)
-        {
-            System.out.println("Something went wrong while trying to send the request to the server");
-            return;
-        }
     }
 }
