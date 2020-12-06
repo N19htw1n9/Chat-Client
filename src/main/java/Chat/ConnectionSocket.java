@@ -20,10 +20,9 @@ public class ConnectionSocket extends Thread {
         this.ip = ip;
         this.port = port;
         this.callback = callback;
-
-        this.run();
     }
 
+    @Override
     public void run() {
         try {
             this.socket = new Socket(this.ip, this.port);
@@ -32,7 +31,6 @@ public class ConnectionSocket extends Thread {
             this.socket.setTcpNoDelay(true);
         } catch (IOException e) {
             System.out.printf("\n\nError, could not connect to server %s port %d\n", this.ip, this.port);
-            return;
         }
         System.out.printf("\nConnected to %s server on port %d\n", this.socket.getLocalSocketAddress().toString(),
                 this.socket.getLocalPort());
@@ -45,17 +43,5 @@ public class ConnectionSocket extends Thread {
 
     public Packet recieve() throws IOException, ClassNotFoundException {
         return (Packet) in.readObject();
-    }
-
-    public Socket getSocket() {
-        return socket;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public int getPort() {
-        return port;
     }
 }
