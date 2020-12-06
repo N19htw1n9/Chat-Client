@@ -39,7 +39,7 @@ public class ConnectionSocket extends Thread {
                 ChatData res = (ChatData) in.readObject();
 
                 if (res.clients != null) {
-                    clientsListCallback.accept((Serializable) res.clients);
+                    clientsListCallback.accept(res.clients);
                 }
                 if (res.message != null) {
                     chatCallback.accept(
