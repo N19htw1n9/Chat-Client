@@ -32,15 +32,15 @@
                     </font>
                 </Label>
             <ListView fx:id="openChatList" layoutX="22.0" layoutY="117.0" prefHeight="506.0" prefWidth="306.0" />
-                  <ImageView fitHeight="38.0" fitWidth="56.0" layoutX="292.0" layoutY="637.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="sendButton" fitHeight="38.0" fitWidth="56.0" layoutX="292.0" layoutY="637.0" onMouseClicked="#sendButtonClick" pickOnBounds="true" preserveRatio="true">
                       <image>
                           <Image url="@SendPicButton.png" />
                       </image>
                   </ImageView>
-            <TextField layoutX="22.0" layoutY="637.0" prefHeight="38.0" prefWidth="264.0" />
+            <TextField fx:id="chatInput" layoutX="22.0" layoutY="637.0" prefHeight="38.0" prefWidth="264.0" promptText="Enter message..." />
          </children>
       </Pane>
-      <ListView fx:id="ClientsListView" layoutY="77.0" prefHeight="624.0" prefWidth="350.0" />
+      <ListView fx:id="clientsList" layoutY="77.0" prefHeight="624.0" prefWidth="350.0" />
       <Label fx:id="ClientsConnectedLabel" layoutX="75.0" layoutY="35.0" text="Clients Connected">
          <font>
             <Font name="System Bold" size="26.0" />
