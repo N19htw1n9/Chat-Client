@@ -2,7 +2,7 @@ package GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -49,7 +49,7 @@ public class ChatController extends Controller implements Initializable {
             });
         }, clientsListData -> {
             Platform.runLater(() -> {
-                ArrayList<ChatData.ChatUser> clients = (ArrayList<ChatData.ChatUser>) clientsListData;
+                List<ChatData.ChatUser> clients = (List<ChatData.ChatUser>) clientsListData;
                 clientsList.getItems().clear();
                 for (ChatData.ChatUser client : clients) {
                     clientsList.getItems().add("Client: " + Integer.toString(client.id));
