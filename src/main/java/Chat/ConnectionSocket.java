@@ -6,7 +6,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.lang.Thread;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class ConnectionSocket extends Thread {
