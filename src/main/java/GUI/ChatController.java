@@ -33,6 +33,7 @@ public class ChatController extends Controller implements Initializable {
     public void quitButtonAction(Event e) {
         Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
         window.close();
+        System.exit(1);
     }
 
     public void sendButtonClick(Event e) {
@@ -65,9 +66,12 @@ public class ChatController extends Controller implements Initializable {
                 }
 
                 ArrayList<ChatData.ChatUser> clients = (ArrayList<ChatData.ChatUser>) clientsListData;
-                for (ChatData.ChatUser client : clients) {
+
+                clients.stream().forEach(client -> {
+                    if (client == null)
+                        return;
                     setListViewItemClick(client);
-                }
+                });
             });
         }, "localhost", 5555);
         connection.start();
