@@ -49,8 +49,11 @@ public class ChatController extends Controller implements Initializable {
             });
         }, clientsListData -> {
             Platform.runLater(() -> {
+                {
+                    clientsList.getItems().clear();
+                }
+
                 ArrayList<ChatData.ChatUser> clients = (ArrayList<ChatData.ChatUser>) clientsListData;
-                clientsList.getItems().clear();
                 for (ChatData.ChatUser client : clients) {
                     clientsList.getItems().add("Client: " + Integer.toString(client.id));
                 }
