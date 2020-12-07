@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.lang.Thread;
+import java.util.HashSet;
 import java.util.function.Consumer;
 
 public class ConnectionSocket extends Thread {
@@ -22,6 +23,14 @@ public class ConnectionSocket extends Thread {
         this.port = port;
         this.chatCallback = chatCallback;
         this.clientsListCallback = clientsListCallback;
+    }
+
+    private String buildToUsersString(HashSet<ChatData.ChatUser> toUsersSet) {
+        StringBuilder res = new StringBuilder();
+        toUsersSet.stream().forEach(user -> {
+            res.append(user.id + ", ");
+        });
+        return res.toString();
     }
 
     @Override
@@ -41,26 +50,26 @@ public class ConnectionSocket extends Thread {
                     clientsListCallback.accept(res.clients);
                 }
                 if (res.message != null) {
+                    String toUsersString = buildToUsersString(res.to);
                     chatCallback.accept(
-                            String.format("From: %d;\t To: %d\nMessage: %s", res.from.id, res.to.id, res.message));
+                            String.format("From: %d;\t To: %s\nMessage: %s", res.from.id, toUsersString, res.message));
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             chatCallback.accept(String.format("Error, could not connect to server %s port %d", this.ip, this.port));
         }
     }
 
-    private ChatData.ChatUser buildUser(int id, String name) {
-        ChatData.ChatUser user = new ChatData.ChatUser();
-        user.id = id;
-        user.name = name;
-        return user;
-    }
+    public void send(String message, HashSet<ChatData.ChatUser> toUsersSet) throws IOException, ClassNotFoundException {
+        toUsersSet.stream().forEach(user -> {
+            System.out.print(user.id + " ");
+        });
+        System.out.println("");
 
-    public void send(String message, int to) throws IOException, ClassNotFoundException {
         ChatData req = new ChatData();
         req.message = message;
-        req.to = buildUser(to, null);
+        req.to = toUsersSet;
         out.writeObject(req);
     }
 }

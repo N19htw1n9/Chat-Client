@@ -3,6 +3,7 @@ package GUI;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -11,7 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import Chat.ConnectionSocket;
@@ -23,12 +24,12 @@ public class ChatController extends Controller implements Initializable {
     @FXML
     private ListView<String> openChatList;
     @FXML
-    private ListView<Text> clientsList;
+    private ListView<HBox> clientsList;
     @FXML
     private TextField chatInput;
     @FXML
     private ImageView sendButton;
-    private ChatData.ChatUser toUser = null;
+    private HashSet<ChatData.ChatUser> toUsersSet = new HashSet<>();
 
     public void quitButtonAction(Event e) {
         Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -37,20 +38,30 @@ public class ChatController extends Controller implements Initializable {
     }
 
     public void sendButtonClick(Event e) {
-        try {
-            connection.send(chatInput.getText(), toUser.id);
-            chatInput.setText("");
-        } catch (Exception e1) {
+        if (toUsersSet.isEmpty()) {
             openChatList.getItems().add("Please select a client");
+        } else {
+            try {
+                connection.send(chatInput.getText(), (HashSet<ChatData.ChatUser>) toUsersSet.clone());
+            } catch (Exception e1) {
+                openChatList.getItems().add("Error, couldn't send user data");
+            }
+            chatInput.setText("");
         }
     }
 
     private void setListViewItemClick(ChatData.ChatUser c) {
-        Text t = new Text("Client: " + Integer.toString(c.id));
-        t.setOnMouseClicked(e -> {
-            toUser = c;
+        CheckBox cb = new CheckBox("Client: " + Integer.toString(c.id));
+        cb.setOnAction(e -> {
+            if (cb.isSelected()) {
+                toUsersSet.add(c);
+            } else {
+                toUsersSet.remove(c);
+            }
         });
-        clientsList.getItems().add(t);
+
+        HBox listItemContainer = new HBox(10, cb);
+        clientsList.getItems().add(listItemContainer);
     }
 
     @Override
