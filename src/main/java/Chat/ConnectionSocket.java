@@ -16,6 +16,7 @@ public class ConnectionSocket extends Thread {
     private Consumer<Serializable> chatCallback, clientsListCallback;
     private ObjectOutputStream out;
     private ObjectInputStream in;
+    private ChatData.ChatUser me;
 
     public ConnectionSocket(Consumer<Serializable> chatCallback, Consumer<Serializable> clientsListCallback, String ip,
             int port) {
@@ -46,6 +47,9 @@ public class ConnectionSocket extends Thread {
             while (true) {
                 ChatData res = (ChatData) in.readObject();
 
+                if (res.me != null) {
+                    me = res.me;
+                }
                 if (res.clients != null) {
                     clientsListCallback.accept(res.clients);
                 }
@@ -62,11 +66,6 @@ public class ConnectionSocket extends Thread {
     }
 
     public void send(String message, HashSet<ChatData.ChatUser> toUsersSet) throws IOException, ClassNotFoundException {
-        toUsersSet.stream().forEach(user -> {
-            System.out.print(user.id + " ");
-        });
-        System.out.println("");
-
         ChatData req = new ChatData();
         req.message = message;
         req.to = toUsersSet;
