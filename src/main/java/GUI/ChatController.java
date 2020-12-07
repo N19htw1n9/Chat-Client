@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import Chat.ConnectionSocket;
@@ -22,11 +23,12 @@ public class ChatController extends Controller implements Initializable {
     @FXML
     private ListView<String> openChatList;
     @FXML
-    private ListView<String> clientsList;
+    private ListView<Text> clientsList;
     @FXML
     private TextField chatInput;
     @FXML
     private ImageView sendButton;
+    private ChatData.ChatUser toUser = null;
 
     public void quitButtonAction(Event e) {
         Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -35,10 +37,19 @@ public class ChatController extends Controller implements Initializable {
 
     public void sendButtonClick(Event e) {
         try {
-            connection.send(chatInput.getText(), 2);
+            connection.send(chatInput.getText(), toUser.id);
+            chatInput.setText("");
         } catch (Exception e1) {
-            e1.printStackTrace();
+            openChatList.getItems().add("Please select a client");
         }
+    }
+
+    private void setListViewItemClick(ChatData.ChatUser c) {
+        Text t = new Text("Client: " + Integer.toString(c.id));
+        t.setOnMouseClicked(e -> {
+            toUser = c;
+        });
+        clientsList.getItems().add(t);
     }
 
     @Override
@@ -55,7 +66,7 @@ public class ChatController extends Controller implements Initializable {
 
                 ArrayList<ChatData.ChatUser> clients = (ArrayList<ChatData.ChatUser>) clientsListData;
                 for (ChatData.ChatUser client : clients) {
-                    clientsList.getItems().add("Client: " + Integer.toString(client.id));
+                    setListViewItemClick(client);
                 }
             });
         }, "localhost", 5555);
