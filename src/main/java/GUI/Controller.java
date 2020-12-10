@@ -9,4 +9,5 @@ public class Controller {
     protected ToggleGroup group;
     protected static ConnectionSocket connection;
     protected static Scene gameSceneState;
+    protected static String username;
 }
