@@ -22,12 +22,12 @@ public class WelcomeScreenController extends Controller {
         String usernameValue = usernameTextField.getText();
         username = usernameValue;
 
-        Parent chatScreen = FXMLLoader.load(getClass().getResource("/ChatScreen.fxml"));
-        Scene chatScene = new Scene(chatScreen);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ChatScreen.fxml"));
+        Parent root = (Parent) loader.load();
 
+        Scene newScene = new Scene(root);
         Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        window.setScene(chatScene);
-        window.setTitle(String.format("%s's Chat", username));
+        window.setScene(newScene);
         window.show();
     }
 }

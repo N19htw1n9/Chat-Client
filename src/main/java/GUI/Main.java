@@ -10,9 +10,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/ChatScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/WelcomeScreen.fxml"));
         primaryStage.setTitle("Chat application");
-        primaryStage.setScene(new Scene(root, 700, 700));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
