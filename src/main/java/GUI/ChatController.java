@@ -1,5 +1,6 @@
 package GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
@@ -84,7 +85,7 @@ public class ChatController extends Controller implements Initializable {
                     setListViewItemClick(client);
                 });
             });
-        }, "localhost", 5555);
+        }, "localhost", 5555, username);
         connection.start();
     }
 }
