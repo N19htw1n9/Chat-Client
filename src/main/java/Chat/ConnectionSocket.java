@@ -16,14 +16,16 @@ public class ConnectionSocket extends Thread {
     private Consumer<Serializable> chatCallback, clientsListCallback;
     private ObjectOutputStream out;
     private ObjectInputStream in;
-    private ChatData.ChatUser me;
+    private ChatData.ChatUser me = null;
+    private String username;
 
     public ConnectionSocket(Consumer<Serializable> chatCallback, Consumer<Serializable> clientsListCallback, String ip,
-            int port) {
+            int port, String username) {
         this.ip = ip;
         this.port = port;
         this.chatCallback = chatCallback;
         this.clientsListCallback = clientsListCallback;
+        this.username = username;
     }
 
     private String buildToUsersString(HashSet<ChatData.ChatUser> toUsersSet) {
@@ -44,11 +46,14 @@ public class ConnectionSocket extends Thread {
 
             chatCallback.accept("Connected to server...");
 
+            sendUserData();
+
             while (true) {
                 ChatData res = (ChatData) in.readObject();
 
                 if (res.me != null) {
                     me = res.me;
+                    chatCallback.accept("Hello, " + me.name);
                 }
                 if (res.clients != null) {
                     clientsListCallback.accept(res.clients);
@@ -70,5 +75,19 @@ public class ConnectionSocket extends Thread {
         req.message = message;
         req.to = toUsersSet;
         out.writeObject(req);
+    }
+
+    public void sendUserData() throws IOException {
+        ChatData req = new ChatData();
+
+        ChatData.ChatUser user = new ChatData.ChatUser();
+        user.name = username;
+
+        req.me = user;
+        try {
+            out.writeObject(req);
+        } catch (Exception e) {
+            System.out.println("Lol. Got eem!!");
+        }
     }
 }
