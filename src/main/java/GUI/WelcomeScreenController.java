@@ -27,6 +27,7 @@ public class WelcomeScreenController extends Controller {
 
         Scene newScene = new Scene(root);
         Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        window.setTitle(String.format("%s's Chat Room", usernameValue));
         window.setScene(newScene);
         window.show();
     }
