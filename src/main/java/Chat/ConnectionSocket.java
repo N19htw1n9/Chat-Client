@@ -36,6 +36,11 @@ public class ConnectionSocket extends Thread {
         return res.toString();
     }
 
+    private String getNameFromUserName(ChatData.ChatUser toUser) {
+        return (toUser.name != null) ? String.format("%s (%d)", toUser.name, toUser.id)
+                : String.format("Anonymous (%d)", toUser.id);
+    }
+
     @Override
     public void run() {
         try {
@@ -61,7 +66,8 @@ public class ConnectionSocket extends Thread {
                 if (res.message != null) {
                     String toUsersString = buildToUsersString(res.to);
                     chatCallback.accept(
-                            String.format("From: %d;\t To: %s\nMessage: %s", res.from.id, toUsersString, res.message));
+                            String.format("From: %s;\t To: %s\nMessage: %s", getNameFromUserName(res.from),
+                                    toUsersString, res.message));
                 }
             }
         } catch (Exception e) {

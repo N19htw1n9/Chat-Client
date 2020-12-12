@@ -1,6 +1,5 @@
 package GUI;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
@@ -51,8 +50,14 @@ public class ChatController extends Controller implements Initializable {
         }
     }
 
+    private String getUserInfo(ChatData.ChatUser c) {
+        if (c.name != null)
+            return String.format("%s (%d)", c.name, c.id);
+        return String.format("%s (%d)", "Anonymous", c.id);
+    }
+
     private void setListViewItemClick(ChatData.ChatUser c) {
-        CheckBox cb = new CheckBox("Client: " + Integer.toString(c.id));
+        CheckBox cb = new CheckBox(getUserInfo(c));
         cb.setOnAction(e -> {
             if (cb.isSelected()) {
                 toUsersSet.add(c);
