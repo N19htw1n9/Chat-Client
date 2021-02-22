@@ -36,7 +36,7 @@ $ cd ./Chat-Client
 ### Build project using Maven
 
 ```shell
-$ mvn pakcage
+$ mvn package
 ```
 
 ### Run server
